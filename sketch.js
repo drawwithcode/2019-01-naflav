@@ -1,47 +1,55 @@
+function preload() {
   // put preload code here
-function preload(){
 }
 
-
-  // put setup code here
 function setup() {
+  // put setup code here
   createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+  frameRate(100);
+  background("#140051");
+  //title
+  textSize(16);
+  textAlign(CENTER);
+  fill("#5149D6");
+  textFont("Roboto Mono");
+  text("  day 'n' nite", width / 2, height / 2);
 }
 
-
-  // put drawing code here
 function draw() {
-var myDiameter = getDiameterFromArea(1000);
-  drawCandy(frameCount, 100, frameCount, myDiameter, "red")
-  drawCandy(frameCount, 200, frameCount*3, myDiameter, "aquamarine")
-  drawCandy(frameCount, 300, frameCount*3, myDiameter, "blue")
-}
+  // put drawing code here
 
+  //sun
+  stroke("#E2F574");
+  strokeWeight(2);
 
-  //a function to get diameter from area
-function getDiameterFromArea (_area){
-  var result = Math.sqrt(_area/PI);
-  return result;
-}
-
-
-  //candies
-function drawCandy(_xpos, _ypos, _rotation, _diameter, _color){
-  var secondColor = 'lime';
-  angleMode(DEGREES)
   push();
-  translate(_xpos, _ypos);
-  rotate(_rotation);
-  noStroke();
-
-    //draw the arcs
-    fill(_color);
-    arc(0, 0, _diameter, _diameter, 0, 90, PIE);
-        fill(secondColor);
-        arc (0, 0, _diameter, _diameter, 90, 180, PIE);
-            fill(_color);
-            arc(0, 0, _diameter, _diameter, 180, 270, PIE);
-                fill(secondColor);
-                arc (0, 0, _diameter, _diameter, 270, 360, PIE);
+  translate(width / 2 - 300, height / 2);
+  scale(0.5)
+  rotate(frameCount * 360);
+  line(300, 0, (300) * cos(frameCount * 4), (300) * sin(frameCount * 4));
   pop();
+  if (frameCount == 360) {
+    noLoop();
+  }
+
+
+
+
+  //moon
+  stroke("#b8d2d5");
+  strokeWeight(2);
+
+  push();
+  translate(width / 2 + 300, height / 2);
+  scale(0.3)
+  rotate(frameCount * 3);
+  line(sin(frameCount * 2) * 300, cos(frameCount * 2) * 300, cos(90) * 300, sin(90) * 300);
+  pop();
+  if (frameCount == 180) {
+    noLoop();
+  }
+
+
+
 }
